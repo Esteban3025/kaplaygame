@@ -6,16 +6,32 @@ const k = kaplay();
 k.scene("game", () => {
 
     k.loadRoot("./");
-    k.loadSprite("survivor", "sprites/survivor.png");
-    k.loadSprite("survivor2", "sprites/survivor2.png");
+    k.loadSprite("survivor", "sprites/survivorsprites.png", {
+      sliceX: 4, // how many sprites are in the X axis
+      sliceY: 5, // how many sprites are in the Y axis
+      anims: {
+        idle: { from: 0, to: 19, loop: true },
+      },
+    });
+    k.loadSprite("coin", "sprites/coin.png");
     k.setBackground(0, 90, 255);
 
     const player = k.add([
-    sprite("survivor"),
-    scale(0.5, 0.5),
-    pos(0, 0),
-    opacity(1,1),
-]);
+    sprite("survivor", {
+      frame: 1,
+      anim: "idle",
+    }),
+      scale(0.5, 0.5),
+      pos(0, 0),
+      opacity(1,1),
+    ]);
+
+    const coin = k.add([
+      sprite("coin"),
+      scale(2.5, 2.5),
+      pos(100, 100),
+      opacity(1,1),
+    ]);
 
   addInput(player);
   press();
